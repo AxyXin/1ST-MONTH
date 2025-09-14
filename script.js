@@ -26,7 +26,7 @@ const galleryData = [
     },
     {
         src: "e3dd1f2c-bb57-4cbb-aa89-88c09ab2a9c0.jpg",
-        alt: "My favorite edit",
+        alt: "Our favorite edit",
         caption: "My favorite edit of our pictures",
         date: "Special Memory"
     },
@@ -34,25 +34,25 @@ const galleryData = [
         src: "wow.jpg",
         alt: "Our Airpods",
         caption: "Our Airpods",
-        date: "Bus Date"
+        date: ""
     },
     {
         src: "wiw.jpg",
         alt: "Ugly Me w/ u & Valak",
         caption: "Ugly Me w/ u & Valak",
-        date: "Movie Date"
+        date: ""
     },
     {
         src: "wuw.jpg",
         alt: "Just a photo of us",
         caption: "Just a photo of us",
-        date: "Selfie"
+        date: ""
     },
     {
         src: "wew.jpg",
         alt: "Us in Food Court",
         caption: "Us in Food Court",
-        date: "Tambay"
+        date: ""
     }
 ];
 
@@ -86,13 +86,14 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeModal();
     initializeButtons();
     observeSections();
+    initializeScrollAnimations();
 });
 
 // Theme Management
 function initializeTheme() {
     const savedTheme = localStorage.getItem('theme') || 'light';
     applyTheme(savedTheme);
-    
+
     themeToggle.addEventListener('click', toggleTheme);
 }
 
@@ -131,7 +132,7 @@ function navigateToSection(sectionId) {
             block: 'start'
         });
     }
-    
+
     // Update active nav button
     navButtons.forEach(btn => btn.classList.remove('active'));
     const activeBtn = document.querySelector(`[data-section="${sectionId}"]`);
@@ -152,7 +153,8 @@ function initializeScrolling() {
 
 // Gallery functionality
 function initializeGallery() {
-    galleryItems.forEach((item, index) => {
+    // Dynamically assign click listeners for all gallery items
+    document.querySelectorAll('.gallery-item').forEach((item, index) => {
         item.addEventListener('click', function() {
             openModal(index);
         });
@@ -195,8 +197,13 @@ function startSlideshow() {
     if (!isSlideshow) {
         isSlideshow = true;
         slideshowBtn.innerHTML = '<span>⏸️</span>Stop Slideshow';
-        slideshowInterval = setInterval(nextPhoto, 3000);
-        console.log('Slideshow started');
+        slideshowInterval = setInterval(() => {
+            nextPhoto();
+            // Loop to first photo if modal is closed
+            if (modal.style.display !== 'block') {
+                stopSlideshow();
+            }
+        }, 3000);
     } else {
         stopSlideshow();
     }
@@ -210,7 +217,6 @@ function stopSlideshow() {
             clearInterval(slideshowInterval);
             slideshowInterval = null;
         }
-        console.log('Slideshow stopped');
     }
 }
 
@@ -219,14 +225,14 @@ function initializeModal() {
     modalClose.addEventListener('click', closeModal);
     modalNext.addEventListener('click', nextPhoto);
     modalPrev.addEventListener('click', prevPhoto);
-    
+
     // Close modal when clicking outside
     modal.addEventListener('click', function(e) {
         if (e.target === modal) {
             closeModal();
         }
     });
-    
+
     // Keyboard navigation
     document.addEventListener('keydown', function(e) {
         if (modal.style.display === 'block') {
@@ -248,6 +254,7 @@ function initializeModal() {
 // Button functionality
 function initializeButtons() {
     slideshowBtn.addEventListener('click', function() {
+        // If modal isn't open, open it at photo 0
         if (modal.style.display === 'block') {
             startSlideshow();
         } else {
@@ -255,7 +262,7 @@ function initializeButtons() {
             setTimeout(startSlideshow, 500);
         }
     });
-    
+
     shareMemoryBtn.addEventListener('click', function() {
         if (navigator.share) {
             navigator.share({
@@ -283,7 +290,7 @@ function observeSections() {
         threshold: 0.3,
         rootMargin: '-100px 0px -100px 0px'
     };
-    
+
     const observer = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -292,7 +299,7 @@ function observeSections() {
             }
         });
     }, observerOptions);
-    
+
     sections.forEach(section => {
         observer.observe(section);
     });
@@ -310,7 +317,6 @@ function updateActiveNavButton(activeSectionId) {
 // Fade in animation on scroll
 function initializeScrollAnimations() {
     const animatedElements = document.querySelectorAll('.fade-in-up');
-    
     const animationObserver = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -320,19 +326,15 @@ function initializeScrollAnimations() {
     }, {
         threshold: 0.1
     });
-    
+
     animatedElements.forEach(element => {
         element.style.animationPlayState = 'paused';
         animationObserver.observe(element);
     });
 }
 
-// Initialize scroll animations when DOM is loaded
-document.addEventListener('DOMContentLoaded', initializeScrollAnimations);
-
 // Handle window resize
 window.addEventListener('resize', function() {
-    // Update modal content on resize
     if (modal.style.display === 'block') {
         updateModalContent();
     }
@@ -365,7 +367,7 @@ document.addEventListener('keydown', function(e) {
     if (konamiCode.length > konamiSequence.length) {
         konamiCode.shift();
     }
-    
+
     if (konamiCode.join(',') === konamiSequence.join(',')) {
         createHeartRain();
         konamiCode = [];
@@ -384,9 +386,9 @@ function createHeartRain() {
             heart.style.zIndex = '9999';
             heart.style.pointerEvents = 'none';
             heart.style.animation = 'float-hearts 3s ease-out forwards';
-            
+
             document.body.appendChild(heart);
-            
+
             setTimeout(() => {
                 if (heart.parentNode) {
                     heart.parentNode.removeChild(heart);
@@ -394,7 +396,6 @@ function createHeartRain() {
             }, 3000);
         }, i * 100);
     }
-    
-    console.log('❤️ Extra love activated! ❤️');
 
+    console.log('❤️ Extra love activated! ❤️');
 }
