@@ -438,7 +438,7 @@ body {
     font-family: var(--font-serif);
     font-size: 1.25rem;
     font-weight: 600;
-    margin: 0;
+    align-items: center;
 }
 
 .quote-icon {
@@ -884,4 +884,5 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--muted-foreground);
+
 }
