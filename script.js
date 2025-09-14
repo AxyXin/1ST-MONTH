@@ -1,34 +1,58 @@
 // Gallery data
 const galleryData = [
     {
-        src: "attached_assets/a33d88ae-62a0-4480-a8ef-721780aa009b_1757853854190.jpg",
+        src: "a33d88ae-62a0-4480-a8ef-721780aa009b.jpg",
         alt: "Our first date",
         caption: "Our very first date together",
         date: "First Date"
     },
     {
-        src: "attached_assets/50c984bc-3189-43de-b9d0-d592c2dd2d1b_1757853872937.jpg",
+        src: "50c984bc-3189-43de-b9d0-d592c2dd2d1b.jpg",
         alt: "Second date in SM Dasma",
         caption: "Our 2nd date in SM Dasma",
         date: "Second Date"
     },
     {
-        src: "attached_assets/43f1f4ef-a1ce-4983-8c7b-f7eea7e4e865_1757853934196.jpg",
+        src: "43f1f4ef-a1ce-4983-8c7b-f7eea7e4e865.jpg",
         alt: "First movie date",
         caption: "Our first movie date",
         date: "Movie Night"
     },
     {
-        src: "attached_assets/597d970f-6724-4caa-9376-30bda339bfa4_1757853969146.jpg",
+        src: "597d970f-6724-4caa-9376-30bda339bfa4.jpg",
         alt: "Eating matcha chocolate",
         caption: "Us eating matcha chocolate",
         date: "Sweet Moment"
     },
     {
-        src: "attached_assets/e3dd1f2c-bb57-4cbb-aa89-88c09ab2a9c0_1757854010587.jpg",
-        alt: "Our favorite edit",
+        src: "e3dd1f2c-bb57-4cbb-aa89-88c09ab2a9c0.jpg",
+        alt: "My favorite edit",
         caption: "My favorite edit of our pictures",
         date: "Special Memory"
+    },
+    {
+        src: "wow.jpg",
+        alt: "Our Airpods",
+        caption: "Our Airpods",
+        date: "Bus Date"
+    },
+    {
+        src: "wiw.jpg",
+        alt: "Ugly Me w/ u & Valak",
+        caption: "Ugly Me w/ u & Valak",
+        date: "Movie Date"
+    },
+    {
+        src: "wuw.jpg",
+        alt: "Just a photo of us",
+        caption: "Just a photo of us",
+        date: "Selfie"
+    },
+    {
+        src: "wew.jpg",
+        alt: "Us in Food Court",
+        caption: "Us in Food Court",
+        date: "Tambay"
     }
 ];
 
@@ -372,4 +396,5 @@ function createHeartRain() {
     }
     
     console.log('❤️ Extra love activated! ❤️');
+
 }
