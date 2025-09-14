@@ -678,11 +678,6 @@ body {
     font-weight: 700;
 }
 
-.action-buttons {
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
 .final-message {
     text-align: center;
     margin-bottom: 3rem;
@@ -886,3 +881,4 @@ html {
     background: var(--muted-foreground);
 
 }
+
